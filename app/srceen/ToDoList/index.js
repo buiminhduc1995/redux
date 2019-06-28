@@ -20,7 +20,13 @@ class index extends PureComponent {
   Add = () => {
     if (this.state.input.length > 0) {
       this.props.add(this.state.input);
+      this.setState({ input: "" });
     }
+  };
+  toggle = () => {
+    console.log("====================================");
+    console.log("toggle");
+    console.log("====================================");
   };
   render() {
     return (
@@ -29,18 +35,27 @@ class index extends PureComponent {
           <TextInput
             placeholder="Input"
             style={{ width: 200, height: 50 }}
+            value={this.state.input}
             onChangeText={txt => this.setState({ input: txt })}
           />
           <TouchableOpacity onPress={() => this.Add()}>
             <Text>Thêm mới</Text>
           </TouchableOpacity>
         </View>
+        {/* <TouchableOpacity>
+          <Text>Hiển thị các công việc hoàn thành</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+              <Text>Hiển thị các công việc chưa hoàn thành</Text>
+        </TouchableOpacity> */}
         <FlatList
           data={this.props.data}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => (
             <View>
-              <Text>{item.name}</Text>
+              <TouchableOpacity onPress={() => this.toggle()}>
+                <Text>{item.name}</Text>
+              </TouchableOpacity>
             </View>
           )}
         />

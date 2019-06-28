@@ -1,4 +1,4 @@
-import { ADD } from "../type";
+import { ADD ,TOGGLE } from "../type";
 const initState = {
   array: [],
   name: "",

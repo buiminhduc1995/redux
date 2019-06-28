@@ -6,15 +6,15 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {add_cart} from '../../redux/action/cart'
 class index extends PureComponent {
-  AddCart =()=>{
-    this.props.add_cart()
+  AddCart =(item)=>{
+    this.props.add_cart(item)
    }
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <Text>Số lượng giỏ hàng của bạn là :{this.props.number}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.props.navigation.navigate('DetailCart')}>
             <Text>Đi tới giỏ hàng của bạn</Text>
           </TouchableOpacity>
         </View>
@@ -23,11 +23,15 @@ class index extends PureComponent {
             data={dataProduct}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <TouchableOpacity
-              onPress={()=>this.AddCart()}
+              <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                 <Text>{item.name}</Text>
+                 <TouchableOpacity
+              onPress={()=>this.AddCart(item)}
               style={styles.list}>
-                <Text>{item.name}</Text>
+               <Text>Mua hàng</Text>
               </TouchableOpacity>
+              </View>
+             
             )}
           />
         </View>
